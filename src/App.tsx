@@ -1,18 +1,21 @@
-import React, { useState, useMemo } from 'react';
-import { SolarDate } from './types/lunar';
-import { getDayDetailedInfo, convertSolar2Lunar } from './utils/lunarSolarEngine';
-import { Navbar } from './components/Navbar';
-import { CalendarMonthView } from './components/CalendarMonthView';
-import { CalendarDailyBlock } from './components/CalendarDailyBlock';
-import { DateConverter } from './components/DateConverter';
-import { DailyHoroscopeView } from './components/DailyHoroscopeView';
-import { HolidaysView } from './components/HolidaysView';
-import { AuspiciousDateFinder } from './components/AuspiciousDateFinder';
-import { AdBanner } from './components/AdBanner';
-import { SideSkyscraperAds } from './components/SideSkyscraperAds';
-import { PolicyModal, PolicyTab } from './components/PolicyModal';
-import { Sparkles, Moon, Sun, ShieldCheck, Download } from 'lucide-react';
-import heroImage from './assets/images/lunar_calendar_hero_1790151076833.jpg';
+import React, { useState, useMemo } from "react";
+import { SolarDate } from "./types/lunar";
+import {
+  getDayDetailedInfo,
+  convertSolar2Lunar,
+} from "./utils/lunarSolarEngine";
+import { Navbar } from "./components/Navbar";
+import { CalendarMonthView } from "./components/CalendarMonthView";
+import { CalendarDailyBlock } from "./components/CalendarDailyBlock";
+import { DateConverter } from "./components/DateConverter";
+import { DailyHoroscopeView } from "./components/DailyHoroscopeView";
+import { HolidaysView } from "./components/HolidaysView";
+import { AuspiciousDateFinder } from "./components/AuspiciousDateFinder";
+import { AdBanner } from "./components/AdBanner";
+import { SideSkyscraperAds } from "./components/SideSkyscraperAds";
+import { PolicyModal, PolicyTab } from "./components/PolicyModal";
+import { Sparkles, Moon, Sun, ShieldCheck, Download } from "lucide-react";
+import heroImage from "./assets/images/lunar_calendar_hero_1790151076833.jpg";
 
 export default function App() {
   // Today's date
@@ -25,10 +28,12 @@ export default function App() {
     };
   }, []);
 
-  const [activeTab, setActiveTab] = useState<'calendar' | 'converter' | 'horoscope' | 'holidays'>('calendar');
+  const [activeTab, setActiveTab] = useState<
+    "calendar" | "converter" | "horoscope" | "holidays"
+  >("calendar");
   const [selectedDate, setSelectedDate] = useState<SolarDate>(today);
   const [policyModalOpen, setPolicyModalOpen] = useState(false);
-  const [policyTab, setPolicyTab] = useState<PolicyTab>('privacy');
+  const [policyTab, setPolicyTab] = useState<PolicyTab>("privacy");
 
   // Detailed Day Info calculated on the fly
   const dayDetailedInfo = useMemo(() => {
@@ -72,7 +77,7 @@ export default function App() {
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-1">
         {/* CALENDAR VIEW */}
-        {activeTab === 'calendar' && (
+        {activeTab === "calendar" && (
           <div className="space-y-6">
             {/* Cultural Hero Header Card */}
             <div className="relative rounded-2xl overflow-hidden border border-amber-900/20 shadow-md bg-stone-900 text-white min-h-[170px] sm:min-h-[190px] flex flex-col justify-end p-6 sm:p-8">
@@ -91,22 +96,33 @@ export default function App() {
                   Lịch Vạn Niên & Âm Dương Cát Nhật
                 </h1>
                 <p className="text-xs sm:text-sm text-stone-200 mt-2 leading-relaxed">
-                  Tính toán thiên văn chuẩn xác theo múi giờ Hà Nội (GMT+7). Cung cấp đầy đủ thông tin Can Chi, Tiết Khí, Giờ Hoàng Đạo, Hướng Xuất Hành và Cát Hung sự vụ mỗi ngày.
+                  Tính toán thiên văn chuẩn xác theo múi giờ Hà Nội (GMT+7).
+                  Cung cấp đầy đủ thông tin Can Chi, Tiết Khí, Giờ Hoàng Đạo,
+                  Hướng Xuất Hành và Cát Hung sự vụ mỗi ngày.
                 </p>
 
                 {/* Quick interactive status line */}
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-amber-200 mt-3 pt-3 border-t border-white/15">
                   <div className="flex items-center gap-1.5">
                     <Sun className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Dương: Ngày {selectedDate.day} tháng {selectedDate.month}, {selectedDate.year}</span>
+                    <span>
+                      Dương: Ngày {selectedDate.day} tháng {selectedDate.month},{" "}
+                      {selectedDate.year}
+                    </span>
                   </div>
                   <span className="text-white/40">·</span>
                   <div className="flex items-center gap-1.5">
                     <Moon className="w-3.5 h-3.5 text-amber-300" />
-                    <span>Âm: Ngày {dayDetailedInfo.lunar.day} tháng {dayDetailedInfo.lunar.month} ({dayDetailedInfo.canChi.day.name})</span>
+                    <span>
+                      Âm: Ngày {dayDetailedInfo.lunar.day} tháng{" "}
+                      {dayDetailedInfo.lunar.month} (
+                      {dayDetailedInfo.canChi.day.name})
+                    </span>
                   </div>
                   <span className="text-white/40">·</span>
-                  <span className="text-emerald-300 font-medium">{dayDetailedInfo.hoangDaoName}</span>
+                  <span className="text-emerald-300 font-medium">
+                    {dayDetailedInfo.hoangDaoName}
+                  </span>
                 </div>
               </div>
             </div>
@@ -145,12 +161,12 @@ export default function App() {
         )}
 
         {/* DATE CONVERTER VIEW */}
-        {activeTab === 'converter' && (
+        {activeTab === "converter" && (
           <div className="space-y-8">
             <DateConverter
               onGoToDateInCalendar={(date) => {
                 setSelectedDate(date);
-                setActiveTab('calendar');
+                setActiveTab("calendar");
               }}
             />
             <AdBanner slotType="leaderboard" />
@@ -158,7 +174,7 @@ export default function App() {
         )}
 
         {/* DAILY HOROSCOPE VIEW */}
-        {activeTab === 'horoscope' && (
+        {activeTab === "horoscope" && (
           <div className="space-y-8">
             <DailyHoroscopeView
               selectedDate={selectedDate}
@@ -170,7 +186,7 @@ export default function App() {
         )}
 
         {/* HOLIDAYS VIEW */}
-        {activeTab === 'holidays' && (
+        {activeTab === "holidays" && (
           <div className="space-y-8">
             <HolidaysView currentYear={selectedDate.year} />
             <AdBanner slotType="leaderboard" />
@@ -193,25 +209,25 @@ export default function App() {
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-stone-600">
               <button
-                onClick={() => setActiveTab('calendar')}
+                onClick={() => setActiveTab("calendar")}
                 className="hover:text-amber-900 transition-colors cursor-pointer"
               >
                 Lịch Vạn Niên
               </button>
               <button
-                onClick={() => setActiveTab('converter')}
+                onClick={() => setActiveTab("converter")}
                 className="hover:text-amber-900 transition-colors cursor-pointer"
               >
                 Chuyển Đổi Ngày Tháng
               </button>
               <button
-                onClick={() => setActiveTab('horoscope')}
+                onClick={() => setActiveTab("horoscope")}
                 className="hover:text-amber-900 transition-colors cursor-pointer"
               >
                 Tử Vi 12 Con Giáp
               </button>
               <button
-                onClick={() => setActiveTab('holidays')}
+                onClick={() => setActiveTab("holidays")}
                 className="hover:text-amber-900 transition-colors cursor-pointer"
               >
                 Ngày Lễ Trong Năm
@@ -227,36 +243,29 @@ export default function App() {
           <div className="border-t border-stone-200/80 pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-stone-500">
             <div className="flex items-center gap-1.5 text-stone-600">
               <ShieldCheck className="w-3.5 h-3.5 text-amber-800 shrink-0" />
-              <span>Tuân thủ chính sách xuất bản Google AdSense & Bảo vệ quyền riêng tư</span>
+              <span>
+                Tuân thủ chính sách xuất bản Google AdSense & Bảo vệ quyền riêng
+                tư
+              </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="/lich-am-viet-source.zip"
-                download="lich-am-viet-source.zip"
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-stone-200/80 hover:bg-stone-300 text-stone-800 font-semibold transition-colors"
-                title="Tải toàn bộ mã nguồn website về máy (.ZIP)"
-              >
-                <Download className="w-3.5 h-3.5 text-amber-800" />
-                <span>Tải Mã Nguồn (.ZIP)</span>
-              </a>
-              <span>·</span>
               <button
-                onClick={() => openPolicy('privacy')}
+                onClick={() => openPolicy("privacy")}
                 className="hover:text-amber-900 hover:underline transition-colors cursor-pointer"
               >
                 Chính sách bảo mật (Privacy Policy)
               </button>
               <span>·</span>
               <button
-                onClick={() => openPolicy('terms')}
+                onClick={() => openPolicy("terms")}
                 className="hover:text-amber-900 hover:underline transition-colors cursor-pointer"
               >
                 Điều khoản sử dụng
               </button>
               <span>·</span>
               <button
-                onClick={() => openPolicy('contact')}
+                onClick={() => openPolicy("contact")}
                 className="hover:text-amber-900 hover:underline transition-colors cursor-pointer text-amber-800 font-medium"
               >
                 Liên hệ & Hợp tác quảng cáo
